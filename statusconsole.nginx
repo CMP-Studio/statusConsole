@@ -16,8 +16,8 @@ server {
 
     client_max_body_size 4G;
 
-    access_log  /var/logs/nginx/nginx-access.log;
-    error_log  /var/logs/nginx/nginx-error.log warn;
+    access_log  /var/log/nginx/nginx-access.log;
+    error_log  /var/log/nginx/nginx-error.log warn;
 
     location /static/ {
         autoindex on;
