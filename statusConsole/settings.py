@@ -29,6 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+#Application Specific
+MISSED_PINGS_SHORT = 1
+MISSED_PINGS_LONG = 10
+
 
 # Application definition
 
