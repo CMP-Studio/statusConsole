@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Contact(models.Model):
-    name = models.CharField(verbose_name='Name')
+    name = models.CharField(verbose_name='Name', max_length=255)
     email = models.EmailField(verbose_name='Email')
 
     def __str__(self):
@@ -26,7 +26,7 @@ class Project(models.Model):
     (False, 'No'),
     )
 
-    name = models.CharField(verbose_name='Project Name', unique=True)
+    name = models.CharField(verbose_name='Project Name', unique=True, max_length=255)
     alertedContacts = models.ManyToManyField(Contact, verbose_name='Emails to send alerts to')
     alertAfter_s = models.IntegerField(default=60, verbose_name='Send alert after (in seconds)')
     active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?')
