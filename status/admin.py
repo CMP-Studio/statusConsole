@@ -4,11 +4,6 @@ from status.models import Project, Contact
 # Register your models here.
 
 
-
-
-class ContactAdmin(admin.ModelAdmin):
-
-
 class ProjectAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(ProjectAdmin, self).get_queryset(request)
@@ -27,5 +22,5 @@ class ProjectAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(Contact, ContactAdmin)
+admin.site.register(Contact)
 admin.site.register(Project, ProjectAdmin)
