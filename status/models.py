@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Project(models.Model):
     STATUS_CHOICES = (
-        (0, 'Inactive')
+        (0, 'Inactive'),
         (1, 'Online'),
         (2, 'Offline (Short)'),
         (3, 'Offline (Long)')
@@ -18,7 +18,7 @@ class Project(models.Model):
         (False, 'No'),
     )
 
-    name = models.CharField(verbose_name='Project Name')
+    name = models.CharField(verbose_name='Project Name', unique=True)
     alertedContacts = models.ManyToManyField(Contact, verbose_name='Emails to send alerts to')
     alertAfter_s = models.IntegerField(default=60, verbose_name='Send alert after (in seconds)')
     active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?')
