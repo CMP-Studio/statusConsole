@@ -13,6 +13,7 @@ class Contact(models.Model):
     def __str__(self):
         return self.name + " <" + self.email + ">"
 
+
 class Project(models.Model):
     STATUS_CHOICES = (
         (0, 'Inactive'),
