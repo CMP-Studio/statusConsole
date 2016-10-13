@@ -16,15 +16,15 @@ class Contact(models.Model):
 
 class Project(models.Model):
     STATUS_CHOICES = (
-        (0, 'Inactive'),
-        (1, 'Online'),
-        (2, 'Offline (Short)'),
-        (3, 'Offline (Long)')
+    (0, 'Inactive'),
+    (1, 'Online'),
+    (2, 'Offline (Short)'),
+    (3, 'Offline (Long)')
     )
 
     YES_NO = (
-        (True, 'Yes'),
-        (False, 'No'),
+    (True, 'Yes'),
+    (False, 'No'),
     )
 
     name = models.CharField(verbose_name='Project Name', unique=True)
