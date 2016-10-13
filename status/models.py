@@ -32,9 +32,9 @@ class Project(models.Model):
     active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?')
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
-    status = models.IntegerField(default=0, choices=STATUS_CHOICES, verbose_name='Status', editiable=False)
-    notified = models.BooleanField(default=False, choices=YES_NO, verbose_name='Admins Notified?', editiable=False)
-    lastPing = models.DateTimeField(nullable=true, verbose_name='Last ping recieved', editiable=False)
+    status = models.IntegerField(default=0, choices=STATUS_CHOICES, verbose_name='Status', editable=False)
+    notified = models.BooleanField(default=False, choices=YES_NO, verbose_name='Admins Notified?', editable=False)
+    lastPing = models.DateTimeField(nullable=true, verbose_name='Last ping recieved', editable=False)
     created_at = models.DateTimeField("Created On", auto_now_add=True, editable=False)
     updated_at = models.DateTimeField("Last Updated On",  auto_now=True, editable=False)
 
