@@ -5,6 +5,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Contact(models.Model):
+    name = models.CharField(verbose_name='Name')
+    email = models.EmailField(verbose_name='Email')
+
+    def __str__(self):
+        return self.name + " <" + self.email + ">"
+
 class Project(models.Model):
     STATUS_CHOICES = (
         (0, 'Inactive'),
@@ -32,11 +40,3 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Contact(models.Model):
-    name = models.CharField(verbose_name='Name')
-    email = models.EmailField(verbose_name='Email')
-
-    def __str__(self):
-        return self.name + " <" + self.email + ">"

@@ -3,8 +3,7 @@ from django.contrib import admin
 from status.models import Project, Contact
 # Register your models here.
 
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(Project, ProjectAdmin)
+
 
 
 class ContactAdmin(admin.ModelAdmin):
@@ -26,3 +25,7 @@ class ProjectAdmin(admin.ModelAdmin):
             obj.owner = request.user
 
         obj.save()
+
+
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(Project, ProjectAdmin)
