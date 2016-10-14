@@ -2,10 +2,28 @@
 
 {% block body %}
 
-  <h1>Projects</h1>
+  <h1>Status Console</h1>
   {% for proj in projects %}
-    <h2>{{ proj.name }}</h2>
-    <h3>{{ proj.status }}</h3>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">{{ proj.name }}</h2>
+    </div>
+    <div class="panel-body">
+      Last ping recieved: <span class='last-ping'></span>
+    </div>
+  </div>
+
   {% endfor %}
+
+{% endblock %}
+
+
+{% block js %}
+  var utc = moment.utc("{{proj.lastping|date:"Y-m-d H:i:s"}}","YYYY-MM-DD HH:mm:ss");
+  var local = moment(utc).local();
+
+  $(".last-ping").text(local.format("M/D/YYYY h:mm:ss a"));
+
 
 {% endblock %}
