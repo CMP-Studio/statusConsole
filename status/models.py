@@ -36,6 +36,7 @@ class Project(models.Model):
     status = models.IntegerField(default=0, choices=STATUS_CHOICES, verbose_name='Status', editable=False)
     notified = models.BooleanField(default=False, choices=YES_NO, verbose_name='Admins Notified?', editable=False)
     lastPing = models.DateTimeField(null=True, verbose_name='Last ping recieved', editable=False)
+    lastPingIP = models.GenericIPAddressField(null=True, editable=False)
     created_at = models.DateTimeField("Created On", auto_now_add=True, editable=False)
     updated_at = models.DateTimeField("Last Updated On",  auto_now=True, editable=False)
 
