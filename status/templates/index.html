@@ -1,0 +1,10 @@
+{% extends "master.html" %}
+
+{% block body %}
+
+  <h1>Projects</h1>
+  {% for proj in projects %}
+    <h2>{{ proj.name }}</h2>
+  {% endfor %}
+
+{% endblock %}
