@@ -14,7 +14,6 @@ import os
 from datetime import timedelta
 from secrets import secrets
 
-from status import tasks
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,12 +41,6 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-CELERYBEAT_SCHEDULE = {
-    'update-projects': {
-        'task': 'tasks.runUpdate',
-        'schedule': timedelta(seconds=30),
-    },
-}
 
 
 # Application definition

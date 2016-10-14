@@ -1,7 +1,7 @@
 from __future__ import absolute_import
+from celery import shared_task
 
 from status.updateProject import updateProjects
-from celery import shared_task
 
 @shared_task
 def runUpdate():
