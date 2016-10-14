@@ -41,7 +41,12 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
-
+CELERYBEAT_SCHEDULE = {
+    'update-projects': {
+        'task': 'tasks.runUpdate',
+        'schedule': timedelta(seconds=30),
+    },
+}
 
 # Application definition
 
