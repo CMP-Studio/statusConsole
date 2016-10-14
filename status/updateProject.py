@@ -1,6 +1,6 @@
 from models import Project
 from django.conf import settings
-
+import pytz
 from datetime import datetime, timedelta
 
 def updateProjects():
@@ -13,7 +13,7 @@ def updateProjects():
         status = 0
         if proj.active:
             delta = timedelta(seconds=proj.alertAfter_s)
-            now = datetime.now()
+            now = datetime.now(pytz.utc)
             lp = proj.lastPing
             if lp:
                 if lp + (delta * long_p) < now:
