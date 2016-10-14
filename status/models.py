@@ -30,7 +30,7 @@ class Project(models.Model):
     alertedContacts = models.ManyToManyField(Contact, verbose_name='Emails to send alerts to')
     alertAfter_s = models.IntegerField(default=60, verbose_name='Send alert after (in seconds)')
     active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?')
-    url = models.SlugField(verbose_name='URL: /ping/', unique=True)
+    url = models.SlugField(verbose_name='URL', unique=True, help_text="The url that your application sends pings to will be /ping/[this field]")
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
     status = models.IntegerField(default=0, choices=STATUS_CHOICES, verbose_name='Status', editable=False)
