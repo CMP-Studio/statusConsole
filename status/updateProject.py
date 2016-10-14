@@ -1,6 +1,7 @@
 from models import Project
 from django.conf import settings
 import pytz
+from ipware.ip import get_real_ip
 from datetime import datetime, timedelta
 
 def updateProjects():
@@ -21,10 +22,24 @@ def updateProjects():
                     status = 3
                 elif lp + (delta * short_p) < now:
                     #missed short ping
-                    #TODO: Send email if not yet sent
+                    #TODO: Email for offline
+                    project.notified = True
                     status = 2
                 else:
-                    #We're good
+                    #Online
                     status = 1
         proj.status = status
         proj.save()
+
+def pingProject(project, request):
+    ip = get_real_ip(request)
+    now = datetime.now(pytz.utc)
+    project.lastPing = now
+    project.lastPingIP = ip
+    if project.status > 1:
+        #If project was offline, set it back to online
+        project.notified = False
+        project.status = 1
+        #TODO: Email for back online
+    project.save()
+    return true
