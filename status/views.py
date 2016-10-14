@@ -6,7 +6,7 @@ from django.http import JsonResponse
 # Create your views here.
 def home(request):
     updateProjects()
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-status')
     context = {'projects': projects}
     return render(request, "index.html" , context)
 

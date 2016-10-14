@@ -23,7 +23,7 @@ def updateProjects():
                 elif lp + (delta * short_p) < now:
                     #missed short ping
                     #TODO: Email for offline
-                    project.notified = True
+                    Project.notified = True
                     status = 2
                 else:
                     #Online
