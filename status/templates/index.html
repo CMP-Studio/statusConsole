@@ -10,7 +10,7 @@
       <h2 class="panel-title">{{ proj.name }}</h2>
     </div>
     <div class="panel-body">
-      Last ping recieved: <span class='last-ping'></span>
+      Last ping recieved: <span data-utc="{{proj.lastping|date:"Y-m-d H:i:s"}}" class='last-ping'></span>
     </div>
   </div>
 
@@ -20,10 +20,14 @@
 
 
 {% block js %}
-  var utc = moment.utc("{{proj.lastping|date:"Y-m-d H:i:s"}}","YYYY-MM-DD HH:mm:ss");
-  var local = moment(utc).local();
+ $(".last-ping").each(function() {
+   var dt = $(this).data("utc");
+   var utc = moment.utc(dt,"YYYY-MM-DD HH:mm:ss");
+   var local = moment(utc).local();
+ 
+   $(this).text(local.format("M/D/YYYY h:mm:ss a"));
+ });
 
-  $(".last-ping").text(local.format("M/D/YYYY h:mm:ss a"));
 
 
 {% endblock %}
