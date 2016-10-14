@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from updateProject import updateProjects, pingProject
 from models import Project
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -12,3 +13,4 @@ def home(request):
 def ping(request, slug):
     proj = get_object_or_404(Project, url=slug)
     pingProject(project, request)
+    return JsonResponse({'project':proj.name, 'pinged': True})
