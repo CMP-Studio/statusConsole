@@ -42,4 +42,4 @@ def pingProject(project, request):
         project.status = 1
         #TODO: Email for back online
     project.save()
-    return true
+    return True
