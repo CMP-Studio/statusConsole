@@ -5,11 +5,30 @@
   <h1>Status Console</h1>
   {% for proj in projects %}
 
-  <div class="panel panel-default">
+  <div class="panel
+  {% if proj.status == 0 %}
+    panel-default
+  {% elif proj.status == 1 %}
+    panel-success
+  {% elif proj.status == 2 %}
+    panel-warning
+  {% elif proj.status == 3 %}
+    panel-danger
+  {% endif %}
+  ">
     <div class="panel-heading">
       <h2 class="panel-title">{{ proj.name }}</h2>
     </div>
     <div class="panel-body">
+      Status: {% if proj.status == 0 %}
+        Inactive
+      {% elif proj.status == 1 %}
+        Online
+      {% elif proj.status == 2 %}
+        Offline (Short duration)
+      {% elif proj.status == 3 %}
+        Offline (Long duration)
+      {% endif %}
       Last ping recieved: <span data-utc="{{proj.lastPing|date:"Y-m-d H:i:s"}}" class='last-ping'></span>
     </div>
   </div>
