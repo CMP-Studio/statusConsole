@@ -6,4 +6,4 @@ from models import Project
 def home(request):
     projects = Project.objects.all()
     context = {'projects': projects}
-    return render(request, "main.html" , context)
+    return render(request, "index.html" , context)
