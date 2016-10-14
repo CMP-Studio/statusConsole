@@ -42,7 +42,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 CELERYBEAT_SCHEDULE = {
     'update-projects': {
-        'task': 'tasks.updateProjects',
+        'task': 'tasks.runUpdate',
         'schedule': timedelta(seconds=30),
     },
 }
