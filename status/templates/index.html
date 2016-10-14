@@ -20,7 +20,7 @@
       <h2 class="panel-title">{{ proj.name }}</h2>
     </div>
     <div class="panel-body">
-      Status: {% if proj.status == 0 %}
+      <p class='status'>Status: {% if proj.status == 0 %}
         Inactive
       {% elif proj.status == 1 %}
         Online
@@ -28,8 +28,8 @@
         Offline (Short duration)
       {% elif proj.status == 3 %}
         Offline (Long duration)
-      {% endif %}
-      Last ping recieved: <span data-utc="{{proj.lastPing|date:"Y-m-d H:i:s"}}" class='last-ping'></span>
+      {% endif %}</p>
+      <p class='last-ping'>Last ping recieved: <span data-utc="{{proj.lastPing|date:"Y-m-d H:i:s"}}" class='last-ping-span'></span></p>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
 
 
 {% block js %}
- $(".last-ping").each(function() {
+ $(".last-ping-span").each(function() {
    var dt = $(this).data("utc");
    console.log(dt);
    var utc = moment.utc(dt,"YYYY-MM-DD HH:mm:ss");
