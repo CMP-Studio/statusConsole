@@ -26,11 +26,11 @@ class Project(models.Model):
     (False, 'No'),
     )
 
-    name = models.CharField(verbose_name='Project Name', unique=True, max_length=255)
+    name = models.CharField(verbose_name='Project Name', max_length=255)
     alertedContacts = models.ManyToManyField(Contact, verbose_name='Emails to send alerts to')
     alertAfter_s = models.IntegerField(default=60, verbose_name='Send alert after (in seconds)')
     active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?')
-    url = models.SlugField(verbose_name='URL: /ping/')
+    url = models.SlugField(verbose_name='URL: /ping/', unique=True)
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
     status = models.IntegerField(default=0, choices=STATUS_CHOICES, verbose_name='Status', editable=False)
