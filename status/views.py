@@ -12,5 +12,5 @@ def home(request):
 
 def ping(request, slug):
     proj = get_object_or_404(Project, url=slug)
-    pingProject(project, request)
+    pingProject(proj, request)
     return JsonResponse({'project':proj.name, 'pinged': True})
