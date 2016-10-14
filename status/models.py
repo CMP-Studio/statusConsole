@@ -29,7 +29,7 @@ class Project(models.Model):
     name = models.CharField(verbose_name='Project Name', max_length=255)
     alertedContacts = models.ManyToManyField(Contact, verbose_name='Emails to send alerts to', help_text='Note: you will automatically recieve an email, no need to add your email here.    ')
     alertAfter_s = models.IntegerField(default=60, verbose_name='Send alert after (in seconds)', help_text = 'It is reccomended that you set this slightly longer than the interval you plan on pinging. e.g. If you plan on sending a ping every 60 seconds, set this to 65.')
-    active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?')
+    active = models.BooleanField(default=False, choices=YES_NO, verbose_name='Active?', help_text='Leave this as "No" until you start pinging this system')
     url = models.SlugField(verbose_name='URL', unique=True, help_text="The url that your application sends pings to will be /ping/[this field]")
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, editable=False)
