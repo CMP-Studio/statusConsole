@@ -1,7 +1,7 @@
 from models import Project
 from django.conf import settings
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 def updateProjects():
     #Get settings
