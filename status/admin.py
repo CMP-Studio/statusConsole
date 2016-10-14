@@ -22,5 +22,5 @@ class ProjectAdmin(admin.ModelAdmin):
         obj.save()
 
 
-admin.site.register(Contact)
+#admin.site.register(Contact)
 admin.site.register(Project, ProjectAdmin)
