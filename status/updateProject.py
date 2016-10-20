@@ -20,12 +20,18 @@ def updateProjects():
             if lp:
                 if lp + (delta * long_p) < now:
                     #missed long ping
+                    proj.notified_up = False
+                    if not proj.notified_down:
+                        sendAlertStart(proj)
+                        proj.notified_down = True
+                        
                     status = 3
                 elif lp + (delta * short_p) < now:
                     #missed short ping
-                    if not proj.notified:
+                    proj.notified_up = False
+                    if not proj.notified_down:
                         sendAlertStart(proj)
-                        proj.notified = True
+                        proj.notified_down = True
                     #Create a downtime
                     startDowntime(proj)
 
@@ -33,6 +39,7 @@ def updateProjects():
                 else:
                     #Online
                     status = 1
+                    proj.notified_down = False
         proj.status = status
         proj.save()
 
@@ -42,9 +49,9 @@ def pingProject(project, request):
     project.lastPing = now
     project.lastPingIP = ip
     if project.status > 1:
-        if project.notified:
+        if not project.notified_up:
             sendAlertEnd(project)
-            project.notified = False
+            project.notified_up = True
         project.status = 1
         endDowntime(project)
     project.save()
