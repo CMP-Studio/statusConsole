@@ -24,7 +24,7 @@ def updateProjects():
                     if not proj.notified_down:
                         sendAlertStart(proj)
                         proj.notified_down = True
-                        
+
                     status = 3
                 elif lp + (delta * short_p) < now:
                     #missed short ping
@@ -40,6 +40,9 @@ def updateProjects():
                     #Online
                     status = 1
                     proj.notified_down = False
+                    if not project.notified_up:
+                        sendAlertEnd(project)
+                        project.notified_up = True
         proj.status = status
         proj.save()
 
