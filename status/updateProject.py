@@ -71,7 +71,7 @@ def getAlertContacts(project):
     emails = []
     #Add owners email
     emails.append(project.owner.email)
-    contacts = project.contact_set.all()
+    contacts = project.alertedContacts.all()
     for c in contacts:
         emails.append(c.email)
     return emails
