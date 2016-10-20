@@ -97,6 +97,15 @@ WSGI_APPLICATION = 'statusConsole.wsgi.application'
 DATABASES = secrets.db_config
 
 
+#Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'innovationstudio.status@gmail.com'
+EMAIL_HOST_PASSWORD = secrets.smtp_pass
+EMAIL_PORT = 587
+EMAIL_FROM = 'innovationstudio.status@gmail.com'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 

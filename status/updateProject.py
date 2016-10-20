@@ -3,6 +3,7 @@ from django.conf import settings
 import pytz
 from ipware.ip import get_real_ip
 from datetime import datetime, timedelta
+from django.core.mail import send_mail
 
 def updateProjects():
     #Get settings
@@ -22,8 +23,9 @@ def updateProjects():
                     status = 3
                 elif lp + (delta * short_p) < now:
                     #missed short ping
-                    #TODO: Email for offline
-                    proj.notified = True
+                    if not proj.notified:
+                        sendAlertStart(proj)
+                        proj.notified = True
                     #Create a downtime
                     startDowntime(proj)
 
@@ -40,10 +42,10 @@ def pingProject(project, request):
     project.lastPing = now
     project.lastPingIP = ip
     if project.status > 1:
-        #If project was offline, set it back to online
-        project.notified = False
+        if proj.notified:
+            sendAlertEnd(project)
+            project.notified = False
         project.status = 1
-        #TODO: Email for back online
         endDowntime(project)
     project.save()
     return True
@@ -64,3 +66,43 @@ def endDowntime(project):
         dt.down_end = datetime.now()
         dt.ongoing = False
         dt.save()
+
+def getAlertContacts(project):
+    emails = []
+    #Add owners email
+    emails.append(project.owner.email)
+    contacts = project.contact_set.all()
+    for c in contacts:
+        emails.append(c.email)
+    return emails
+
+
+def sendAlertStart(project):
+    #First gather addresses
+    to = getAlertContacts(project)
+    name = project.name
+
+    now = datetime.utcnow()
+    eastern = pytz.timezone('US/Eastern')
+    local = now.replace(tzinfo=pytz.utc).astimezone(eastern)
+    strlocal = local.strftime("%Y-%m-%d %H:%M:%S %Z")
+
+    lp = project.lastPing
+    lplocal = lp.replace(tzinfo=pytz.utc).astimezone(eastern)
+    strlp = local.strftime("%Y-%m-%d %H:%M:%S %Z")
+
+    send_mail("Application Down: " + name, name + " stopped pinning on " + strlocal + "\nThe last ping was recieved on " + strlp, to)
+
+
+
+def sendAlertEnd(project):
+    #First gather addresses
+    to = getAlertContacts(project)
+    name = project.name
+
+    now = datetime.utcnow()
+    eastern = pytz.timezone('US/Eastern')
+    local = now.replace(tzinfo=pytz.utc).astimezone(eastern)
+    strlocal = local.strftime("%Y-%m-%d %H:%M:%S %Z")
+
+    send_mail("Application Back Up: " + name, name + " has resumed pinning at " + strlocal, to)
