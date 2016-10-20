@@ -105,4 +105,4 @@ def sendAlertEnd(project):
     local = now.replace(tzinfo=pytz.utc).astimezone(eastern)
     strlocal = local.strftime(settings.DATETIME_FORMAT)
 
-    send_mail("Application Back Up: " + name, name + " started responding again on " + strlocal, settings.EMAIL_FROM, to)
+    send_mail("Application Back Up: " + name, "The application \"" + name + "\" started responding again on " + strlocal, settings.EMAIL_FROM, to)
