@@ -51,10 +51,10 @@ def pingProject(project, request):
     now = datetime.now(pytz.utc)
     project.lastPing = now
     project.lastPingIP = ip
+    if not project.notified_up:
+        sendAlertEnd(project)
+        project.notified_up = True
     if project.status > 1:
-        if not project.notified_up:
-            sendAlertEnd(project)
-            project.notified_up = True
         project.status = 1
         endDowntime(project)
     project.save()
