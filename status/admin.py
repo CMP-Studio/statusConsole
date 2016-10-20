@@ -11,7 +11,7 @@ class ProjectAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
                 return qs
 
-        return qs.filter(host=request.user)
+        return qs.filter(owner=request.user)
 
 
     def save_model(self, request, obj, form, change):
