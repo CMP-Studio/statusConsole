@@ -104,7 +104,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'innovationstudio.status@gmail.com'
 EMAIL_HOST_PASSWORD = secrets.smtp_pass
 EMAIL_PORT = 587
-EMAIL_FROM = 'innovationstudio.status@gmail.com'
+EMAIL_FROM = 'Studio Status Console <innovationstudio.status@gmail.com>'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -137,6 +137,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+DATETIME_FORMAT = '%B %-d, %Y at %I:%M:%S %p'
 
 
 # Static files (CSS, JavaScript, Images)

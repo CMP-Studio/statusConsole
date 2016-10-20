@@ -85,13 +85,13 @@ def sendAlertStart(project):
     now = datetime.utcnow()
     eastern = pytz.timezone('US/Eastern')
     local = now.replace(tzinfo=pytz.utc).astimezone(eastern)
-    strlocal = local.strftime("%Y-%m-%d %H:%M:%S %Z")
+    strlocal = local.strftime(settings.DATETIME_FORMAT)
 
     lp = project.lastPing
     lplocal = lp.replace(tzinfo=pytz.utc).astimezone(eastern)
-    strlp = local.strftime("%Y-%m-%d %H:%M:%S %Z")
+    strlp = local.strftime(settings.DATETIME_FORMAT)
 
-    send_mail("Application Down: " + name, name + " stopped pinning on " + strlocal + "\nThe last ping was recieved on " + strlp, settings.EMAIL_FROM, to)
+    send_mail("Application Down: " + name,"Notice: " + name + " stopped pinning on " + strlocal + ".  The last ping was recieved on " + strlp, settings.EMAIL_FROM, to)
 
 
 
@@ -103,6 +103,6 @@ def sendAlertEnd(project):
     now = datetime.utcnow()
     eastern = pytz.timezone('US/Eastern')
     local = now.replace(tzinfo=pytz.utc).astimezone(eastern)
-    strlocal = local.strftime("%Y-%m-%d %H:%M:%S %Z")
+    strlocal = local.strftime(settings.DATETIME_FORMAT)
 
     send_mail("Application Back Up: " + name, name + " has resumed pinning at " + strlocal, settings.EMAIL_FROM, to)
