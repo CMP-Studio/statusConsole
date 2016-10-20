@@ -54,10 +54,10 @@ def startDowntime(project):
     for dt in activeDts:
         dt.ongoing = False
         dt.save()
-
-    dt = Downtime()
-    dt.Project = proj
-    dt.save()
+    #Now create a new downtime
+    newDt = Downtime()
+    newDt.Project = project
+    newDt.save()
 
 def endDowntime(project):
     activeDts = Downtime.objects.filter(project=project, ongoing=True)
