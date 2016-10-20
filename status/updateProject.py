@@ -42,7 +42,7 @@ def pingProject(project, request):
     project.lastPing = now
     project.lastPingIP = ip
     if project.status > 1:
-        if proj.notified:
+        if project.notified:
             sendAlertEnd(project)
             project.notified = False
         project.status = 1
