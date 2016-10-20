@@ -40,9 +40,9 @@ def updateProjects():
                     #Online
                     status = 1
                     proj.notified_down = False
-                    if not project.notified_up:
-                        sendAlertEnd(project)
-                        project.notified_up = True
+                    if not proj.notified_up:
+                        sendAlertEnd(proj)
+                        proj.notified_up = True
         proj.status = status
         proj.save()
 
