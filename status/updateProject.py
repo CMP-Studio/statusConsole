@@ -1,4 +1,4 @@
-from models import Project
+from models import Project, Downtime, Contact
 from django.conf import settings
 import pytz
 from ipware.ip import get_real_ip
@@ -23,7 +23,10 @@ def updateProjects():
                 elif lp + (delta * short_p) < now:
                     #missed short ping
                     #TODO: Email for offline
-                    Project.notified = True
+                    proj.notified = True
+                    #Create a downtime
+                    startDowntime(proj)
+
                     status = 2
                 else:
                     #Online
@@ -41,5 +44,24 @@ def pingProject(project, request):
         project.notified = False
         project.status = 1
         #TODO: Email for back online
+        endDowntime(project)
     project.save()
     return True
+
+def startDowntime(project):
+    #First stop any other ongoing downtimes
+    activeDts = Downtime.objects.get(project=project, ongoing=True)
+    for dt in activeDts:
+        dt.ongoing = False
+        dt.save()
+
+    dt = Downtime()
+    dt.Project = proj
+    dt.save()
+
+def endDowntime(project):
+    activeDts = Downtime.objects.get(project=project, ongoing=True)
+        for dt in activeDts:
+            dt.down_end = datetime.now()
+            dt.ongoing = False
+            dt.save()

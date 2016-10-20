@@ -42,3 +42,9 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+class Downtime(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, editable=False)
+    down_start = models.DateTimeField("Downtime Started On", auto_now_add=True, editable=False)
+    down_end = models.DateTimeField("Downtime Ended On", null=True, editable=False)
+    ongoing = models.BooleanField(default=True)
