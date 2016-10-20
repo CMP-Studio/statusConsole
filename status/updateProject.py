@@ -55,8 +55,7 @@ def startDowntime(project):
         dt.ongoing = False
         dt.save()
     #Now create a new downtime
-    newDt = Downtime()
-    newDt.Project = project
+    newDt = Downtime(Project=project)
     newDt.save()
 
 def endDowntime(project):
