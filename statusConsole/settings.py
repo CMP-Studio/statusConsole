@@ -138,7 +138,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-DATETIME_FORMAT = '%B %-d, %Y at %I:%M:%S %p'
+DATETIME_FORMAT = '%B %-d, %Y at %-I:%M:%S %p'
 
 
 # Static files (CSS, JavaScript, Images)

@@ -105,4 +105,4 @@ def sendAlertEnd(project):
     local = now.replace(tzinfo=pytz.utc).astimezone(eastern)
     strlocal = local.strftime(settings.DATETIME_FORMAT)
 
-    send_mail("Application Back Up: " + name, name + " has resumed pinning at " + strlocal, settings.EMAIL_FROM, to)
+    send_mail("Application Back Up: " + name, name + " has resumed pinning on " + strlocal, settings.EMAIL_FROM, to)
