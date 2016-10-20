@@ -50,7 +50,7 @@ def pingProject(project, request):
 
 def startDowntime(project):
     #First stop any other ongoing downtimes
-    activeDts = Downtime.objects.get(project=project, ongoing=True)
+    activeDts = Downtime.objects.filter(project=project, ongoing=True)
     for dt in activeDts:
         dt.ongoing = False
         dt.save()
@@ -60,7 +60,7 @@ def startDowntime(project):
     dt.save()
 
 def endDowntime(project):
-    activeDts = Downtime.objects.get(project=project, ongoing=True)
+    activeDts = Downtime.objects.filter(project=project, ongoing=True)
     for dt in activeDts:
         dt.down_end = datetime.now()
         dt.ongoing = False
