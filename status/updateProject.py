@@ -99,7 +99,7 @@ def sendAlertStart(project):
 
     lp = project.lastPing
     lplocal = lp.replace(tzinfo=pytz.utc).astimezone(eastern)
-    strlp = local.strftime(settings.DATETIME_FORMAT)
+    strlp = lplocal.strftime(settings.DATETIME_FORMAT)
 
     send_mail("Application Down: " + name,"The application \"" + name + "\" was last heard from on " + strlp, settings.EMAIL_FROM, to)
 
