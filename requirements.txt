@@ -11,7 +11,7 @@ anyjson==0.3.3
 apt-xapian-index==0.45
 argparse==1.2.1
 billiard==3.3.0.23
-celery==3.1.24
+celery==5.2.2
 chardet==2.0.1
 cloud-init==0.7.5
 colorama==0.2.5
